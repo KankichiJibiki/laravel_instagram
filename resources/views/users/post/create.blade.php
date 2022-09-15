@@ -3,9 +3,10 @@
 @section('title', 'Create Post')
 
 @section('content')
-    <div class="container d-flex justify-content-center align-items-center border">
+    <div class="container d-flex justify-content-center align-items-center bg-light p-3">
         {{-- main conteiner --}}
-        <form action="/post" method="post" enctype="multipart/form-data" class="col-lg-8 col-md-11 col-12 d-flex flex-wrap justify-content-between p-2">
+        <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data" class="col-lg-8 col-md-11 col-12 d-flex flex-wrap justify-content-between p-2">
+            @csrf
             {{-- left top container --}}
             <div class="col-md-6 col-12">
                 {{-- checkbox --}}

@@ -24,7 +24,6 @@ class PostController extends Controller
     public function rules(){
         return [
             "user_id" => ['require'],
-            "" => ['require'],
         ];
     }
     /**
@@ -55,15 +54,27 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function saveImage($image){
-        $image_name = now() . "." . $image->extension();
-        $image->storeAt($image_name, self::LOCAL_STORAGE);
+        $image_name = time() . "." . $image->extension();
+        $image->storeAs(self::LOCAL_STORAGE, $image_name);
+
+        // $request->image->store();
         return $image_name;
     }
 
     public function store(Request $request)
     {
-        $user_id = ['user_id' => Auth::id()];
+        $this->post->user_id = Auth::id();
+        $this->post->description = $request->description;
+        $this->post->image = $this->saveImage($request->image);
+        $this->post->save();
 
+        foreach($request->categories as $category_id):
+            $category_post[] = ["category_id"=>$category_id];
+        endforeach;
+
+        $this->post->post_categories()->createMany($category_post);
+        
+        return redirect()->route('index');
     }
 
     /**

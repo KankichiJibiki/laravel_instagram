@@ -63,7 +63,7 @@
 
                             {{-- create --}}
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('post.create')}}" class="nav-link">
                                     <i class="fa-solid fa-circle-plus icon-sm"></i>
                                 </a>
                             </li>
@@ -100,9 +100,9 @@
             </div>
         </nav>
 
-        <main class="py-5">
-            <div class="container">
-                <div class="row justify-content-center">
+        <main class="bg-dark">
+            <div class="container-fluid">
+                <div class="row justify-content-center align-items-center">
                     {{-- admin content --}}
                     <div class="col-9">
                         @yield('content')

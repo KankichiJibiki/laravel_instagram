@@ -20,6 +20,5 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'] ,function(){
     Route::get('/', [HomeController::class, 'index'])->name('index');
-    Route::get('/post/create', [PostController::class, 'create']);
-    // Route::resource('/users', UserController::class)->except(('index'));
+    Route::resource('/post', PostController::class)->except(('index'));
 });
