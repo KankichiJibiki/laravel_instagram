@@ -1,5 +1,7 @@
 :root{
     --icon-size:2rem;
+    --btn-option: 1.2rem;
+    --size-sm: .7rem;
 }
 .icon-sm{
     font-size: var(--icon-size);
@@ -9,4 +11,12 @@
     font-size: var(--icon-size);
     border: 3px solid pink;
     border-radius: 50%;
+}
+
+.btn-opt{
+    font-size: var(--btn-option);
+}
+
+.muted_text{
+    font-size: var(--size-sm);
 }

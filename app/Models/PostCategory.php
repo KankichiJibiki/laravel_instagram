@@ -17,11 +17,7 @@ class PostCategory extends Model
     ];
 
 
-    // public function post(){
-    //     return $this->belongsTo(Post::class);
-    // }
-
-    public function category(){
+    public function categories(){
         return $this->belongsTo(Category::class);
     }
 }
