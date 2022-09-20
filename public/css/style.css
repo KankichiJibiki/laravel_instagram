@@ -24,3 +24,8 @@
 .action_icon:hover{
     transform: scale(1.04);
 }
+
+.overflow-y{
+    overflow-y: auto;
+    overflow-x: hidden;
+}

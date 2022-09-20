@@ -4,6 +4,7 @@
         <button type="submit" class="action_icon p-0 bg-light border-0">
             <i class="fa-regular fa-heart btn-opt"></i>
         </button>
+        
         <!-- Modal trigger button -->
         <button type="button" class="action_icon p-0 bg-light border-0" data-bs-toggle="modal" data-bs-target="#view_comment_{{$post->id}}">
             <i class="fa-regular fa-comment btn-opt"></i>

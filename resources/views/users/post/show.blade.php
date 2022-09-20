@@ -15,6 +15,18 @@
                     </div>
                     <div>
                         @include('users.post.components.footer')
+                        @php
+                            $count = 0;    
+                        @endphp
+                        @foreach ($post->comments as $comment)
+                            @if($count > 1)
+                                @break;
+                            @endif
+                            @include('users.post.components.comment.commentview')
+                            @php
+                                $count++;
+                            @endphp
+                        @endforeach
                     </div>
                 </div>
             </div>
