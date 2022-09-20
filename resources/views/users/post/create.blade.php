@@ -3,7 +3,7 @@
 @section('title', 'Create Post')
 
 @section('content')
-    <div class="container d-flex justify-content-center align-items-center bg-light p-3">
+    <div class="container d-flex justify-content-center align-items-center bg-light p-3 my-3">
         {{-- main conteiner --}}
         <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data" class="col-lg-8 col-md-11 col-12 d-flex flex-wrap justify-content-between p-2">
             @csrf

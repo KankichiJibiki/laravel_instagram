@@ -83,7 +83,7 @@
                                         {{Auth::user()->username}}'s Profile
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -111,5 +111,6 @@
             </div>
         </main>
     </div>
+    <script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>

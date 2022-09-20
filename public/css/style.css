@@ -20,3 +20,7 @@
 .muted_text{
     font-size: var(--size-sm);
 }
+
+.action_icon:hover{
+    transform: scale(1.04);
+}

@@ -28,6 +28,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.home')->with('posts', $this->post->all());
+        return view('users.home')->with('posts', $this->post->latest()->get());
     }
 }

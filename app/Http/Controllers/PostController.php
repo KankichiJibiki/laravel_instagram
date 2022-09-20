@@ -96,7 +96,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('users.post.edit')
+            ->with('post', $post)
+            ->with('categories', $this->category->all());
     }
 
     /**
@@ -108,7 +110,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        if($request->has('image')){
+            $post->image = $this->saveImage($request->image);
+        }
+        $post->description = $request->description;
+        $post->save();
+
+        // return $request->categories;
+        foreach($request->categories as $category_id) {
+            $updated_post_categories[] = ["category_id"=>$category_id];
+        }
+
+        $post->post_categories()->delete();
+        $post->post_categories()->createMany($updated_post_categories);
+
+        return redirect()->route('post.show', $post);
     }
 
     /**
@@ -119,6 +135,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('index');
     }
 }
