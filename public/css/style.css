@@ -2,6 +2,7 @@
     --icon-size:2rem;
     --btn-option: 1.2rem;
     --size-sm: .7rem;
+    --profile-icon: 5rem;
 }
 .icon-sm{
     font-size: var(--icon-size);
@@ -11,6 +12,23 @@
     font-size: var(--icon-size);
     border: 3px solid pink;
     border-radius: 50%;
+}
+
+.profile_icon_default{
+    font-size: var(--profile-icon);
+    border: 3px solid pink;
+}
+
+.avatar_icon_sm{
+    width: var(--icon-size);
+    height: var(--icon-size);
+    border: 3px solid pink;
+}
+
+.avatar_icon{
+    width: var(--profile-icon);
+    height: var(--profile-icon);
+    border: 3px solid pink;
 }
 
 .btn-opt{

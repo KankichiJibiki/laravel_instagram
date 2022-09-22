@@ -9,8 +9,10 @@
     @if ($post->comments->isEmpty())
         <p class="text-center text-muted">No comment on this post</p>
     @else
-        @foreach ($post->comments as $comment)
-            @include('users.post.components.comment.commentview')
-        @endforeach
+        <div class="overflow-y" style="height:200px;">
+            @foreach ($post->comments as $comment)
+                @include('users.post.components.comment.commentview')
+            @endforeach
+        </div>
     @endif
 </div>

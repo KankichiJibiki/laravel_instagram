@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,7 @@ Route::group(['middleware' => 'auth'] ,function(){
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::resource('/post', PostController::class)->except(('index'));
     Route::resource('/comments', CommentController::class);
+    Route::get('/users/profile', [UserController::class, 'create'])->name('profile');
+    Route::resource('/users', UserController::class)->except('create');
+
 });

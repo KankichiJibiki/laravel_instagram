@@ -17,3 +17,9 @@ function displayCommentInput(post_id){
 
     displayBlock(commentInput);
 }
+
+function confirmPop(){
+    let yerOrNo = window.confirm('Are you sure?');
+
+    return yerOrNo ? true : false;
+}
