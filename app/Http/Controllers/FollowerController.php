@@ -4,29 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Follower;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Follower;
+use App\Models\User;
 
-class UserController extends Controller
+class FollowerController extends Controller
 {
+
+    private $follower;
+    private $user_followers;
+
+    public function __construct(Follower $follower, User $user)
+    {
+        $this->user = $user;
+        $this->follower = $follower;
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
-    const LOCAL_STORAGE = 'public/images/';
-    public $user;
-    public $follower;
-
-    public function __construct(User $user, Follower $follower)
-    {
-        $this->user = $user;
-        $this->follower = $follower;
-    }
-
     public function index()
     {
         //
@@ -39,13 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $posts = Post::where('user_id', '=', Auth::id())->latest()->get();
-        $followers = $this->follower->all();
-
-        return view('users.profile')
-        ->with('posts', $posts)
-        ->with('followers', $followers)
-        ->with('users', $this->user->all());
+        //
     }
 
     /**
@@ -56,7 +48,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $user_id = ['user_id'=>Auth::id()];
+        // return $user_id;
+        $this->follower->create(array_merge($request->all(), $user_id))->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -67,7 +64,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('users.follow.show')
+            ->with('followers', $this->follower->all())
+            ->with('users', $this->user->all());
     }
 
     /**
@@ -78,7 +77,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit');
+        //
     }
 
     /**
@@ -88,23 +87,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function saveAvatar($avatar){
-        $avatar_name = time() . "." . $avatar->extension();
-        $avatar->storeAs(self::LOCAL_STORAGE, $avatar_name);
-        return $avatar_name;
-    }
-
     public function update(Request $request, $id)
     {
-        $user = $this->user->findOrFail($id);
-
-        if($request->avatar) {
-            $avatar = ["avatar"=>$this->saveAvatar($request->avatar)];
-            $user->fill(array_merge($request->all(), $avatar))->save();
-        } else $user->fill($request->all())->save();
         
-        return redirect()->route('profile');
     }
 
     /**
@@ -115,6 +100,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->follower->destroy($id);
+        return redirect()->back();
     }
 }

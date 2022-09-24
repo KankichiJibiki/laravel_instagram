@@ -3,6 +3,7 @@
     --btn-option: 1.2rem;
     --size-sm: .7rem;
     --profile-icon: 5rem;
+    --profile-icon_bigger: 7rem;
 }
 .icon-sm{
     font-size: var(--icon-size);
@@ -31,6 +32,12 @@
     border: 3px solid pink;
 }
 
+.avatar_icon_bigger{
+    width: var(--profile-icon_bigger);
+    height: var(--profile-icon_bigger);
+    border: 3px solid pink;
+}
+
 .btn-opt{
     font-size: var(--btn-option);
 }
@@ -39,11 +46,32 @@
     font-size: var(--size-sm);
 }
 
-.action_icon:hover{
+.action_icon:hover, .post_image:hover{
     transform: scale(1.04);
 }
 
 .overflow-y{
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.fixedCon{
+    position: fixed;
+    right: 2rem;
+    top: 4.7rem;
+}
+
+.text-sm{
+    font-size: var(--size-sm);
+}
+
+.like_icon:active{
+    color: red;
+    transform: scale(1.01);
+}
+
+@media screen and (max-width: 900px){
+    .fixedCon{
+        display: none;
+    }
 }

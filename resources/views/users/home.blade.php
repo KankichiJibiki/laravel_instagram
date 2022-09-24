@@ -9,16 +9,31 @@
 
             @if ($posts->isNotEmpty())
                 <div class="d-flex flex-column align-items-center my-3">
+                    @php
+                        $followers_arr = [];
+                        foreach(Auth::user()->followers as $follower) {
+                            $followers_arr[] = $follower->following_id;
+                        }
+                    @endphp
                        
                     @foreach ($posts as $post)
-                        <div class="col-md-10 col-11 p-2 bg-light mb-1">
-                            @include('users.post.components.header')
+                        @if (in_array($post->user->id, $followers_arr) || $post->user->id == Auth::id())
+                            <div class="col-md-10 col-11 p-2 bg-light mb-1">
+                                @include('users.post.components.header')
 
-                            @include('users.post.components.body')
-                            
-                            @include('users.post.components.footer')
-                        </div>
+                                @include('users.post.components.body')
+                                
+                                @include('users.post.components.footer')
+                            </div>
+                        @endif
                     @endforeach
+                </div>
+                {{-- //following suggestion --}}
+                <div class="col-3 fixedCon p-2">
+                    @include('users.post.components.following.reccomedation')
+                    <div class="text-muted">
+                        <a href="{{route('follower.show', Auth::id())}}" class="muted_text text-decoration-none">View All suggestion</a>
+                    </div>
                 </div>
             @else
                 <div class="d-flex flex-column align-items-center my-3">

@@ -12,7 +12,11 @@
                     {{-- icon --}}
                     <div class="d-flex justify-content-center">
                         <div class="col-4 p-2 text-center">
-                            <i class="profile_icon_default rounded-circle p-0 m-0 fa-solid fa-circle-user icon-sm"></i>
+                            @if (Auth::user()->avatar)
+                                <img src="{{asset('storage/images/' . Auth::user()->avatar)}}" alt="" class="avatar_icon_bigger rounded-circle">
+                            @else
+                                <i class="profile_icon_default rounded-circle p-0 m-0 fa-solid fa-circle-user icon-sm"></i>
+                            @endif
                             <input type="file" name="avatar" id="avatar" class="border-0 text-primary">
                         </div>
                     </div>

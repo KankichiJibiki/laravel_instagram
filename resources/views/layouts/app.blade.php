@@ -17,6 +17,8 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- vue2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>

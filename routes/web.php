@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +28,6 @@ Route::group(['middleware' => 'auth'] ,function(){
     Route::resource('/comments', CommentController::class);
     Route::get('/users/profile', [UserController::class, 'create'])->name('profile');
     Route::resource('/users', UserController::class)->except('create');
-
+    Route::resource('/follower', FollowerController::class);
+    Route::resource('/likes', LikeController::class);
 });
