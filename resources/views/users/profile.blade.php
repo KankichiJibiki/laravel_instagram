@@ -69,7 +69,7 @@
                 <div class="col-10 p-2 d-flex flex-wrap">
                     @foreach ($posts as $post)
                         <a href="{{route('post.show', $post)}}" class="col-4 post_image">
-                            <img src="{{asset('storage/images/' . $post->image)}}" alt="" class="w-100 img-responsive border border-secondary" height="180px">
+                            <img src="{{asset('storage/images/' . $post->image)}}" alt="" class="w-100 img-responsive border border-secondary">
                         </a>
                     @endforeach
                 </div>
@@ -80,14 +80,4 @@
             <input type="text" v-model="Introduction" placeholder="enter your introduction">
         </div>
     </div>
-    <!-- vue2 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script>
-        var intro = new Vue({
-            el: '#introCon',
-            data: {
-                introduction: null
-            }
-        });
-    </script>
 @endsection

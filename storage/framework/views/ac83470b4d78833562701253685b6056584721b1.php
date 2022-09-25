@@ -71,7 +71,7 @@
                 <div class="col-10 p-2 d-flex flex-wrap">
                     <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <a href="<?php echo e(route('post.show', $post)); ?>" class="col-4 post_image">
-                            <img src="<?php echo e(asset('storage/images/' . $post->image)); ?>" alt="" class="w-100 img-responsive border border-secondary" height="180px">
+                            <img src="<?php echo e(asset('storage/images/' . $post->image)); ?>" alt="" class="w-100 img-responsive border border-secondary">
                         </a>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
@@ -82,15 +82,5 @@
             <input type="text" v-model="Introduction" placeholder="enter your introduction">
         </div>
     </div>
-    <!-- vue2 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script>
-        var intro = new Vue({
-            el: '#introCon',
-            data: {
-                introduction: null
-            }
-        });
-    </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\kan04\OneDrive\デスクトップ\laravel_portfolio\laravel_instagram\resources\views/users/profile.blade.php ENDPATH**/ ?>
