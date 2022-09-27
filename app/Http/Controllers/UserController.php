@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Follower;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,9 +22,11 @@ class UserController extends Controller
     public $user;
     public $follower;
 
-    public function __construct(User $user, Follower $follower)
+    public function __construct(User $user, Post $post, Category $category, Follower $follower)
     {
         $this->user = $user;
+        $this->post = $post;
+        $this->category = $category;
         $this->follower = $follower;
     }
 
@@ -45,7 +48,7 @@ class UserController extends Controller
         return view('users.profile')
         ->with('posts', $posts)
         ->with('followers', $followers)
-        ->with('users', $this->user->all());
+        ->with('users', $this->user->latest()->get());
     }
 
     /**
@@ -67,7 +70,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $userWithTrashed = $this->user->withTrashed()->get();
+        return view('users.admin.user')
+            ->with('users', $userWithTrashed)
+            ->with('posts', $this->post->latest()->get())
+            ->with('categories', $this->category->latest()->get());
     }
 
     /**
@@ -116,5 +123,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = $this->user->findOrFail($id);
+        $user->delete();
+        return redirect()->back();
+    }
+
+    public function activate($id){
+        $user = $this->user->withTrashed()->findOrFail($id);
+        $user->restore();
+
+        return redirect()->back();
     }
 }

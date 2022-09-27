@@ -71,7 +71,7 @@
                 <div class="col-10 p-2 d-flex flex-wrap">
                     <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <a href="<?php echo e(route('post.show', $post)); ?>" class="col-4 post_image">
-                            <img src="<?php echo e(asset('storage/images/' . $post->image)); ?>" alt="" class="w-100 img-responsive border border-secondary">
+                            <img src="<?php echo e(asset('storage/images/' . $post->image)); ?>" alt="" class="w-100 img-responsive border border-secondary h-100" >
                         </a>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>

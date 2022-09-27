@@ -23,3 +23,10 @@ function confirmPop(){
 
     return yerOrNo ? true : false;
 }
+
+function categoryColor(id){
+    const categoryGroup = document.getElementById('categoryGroup');
+    let categoryItems = categoryGroup.querySelectorAll('list-group-item');
+
+    categoryItems.item(id).classList.add('bg-primary')
+}

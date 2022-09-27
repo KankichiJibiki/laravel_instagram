@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @if ($posts->isNotEmpty())
+            @if ($posts->isNotEmpty() && Auth::user()->followers->count() != 0)
                 <div class="d-flex flex-column align-items-center my-3">
                     @php
                         $followers_arr = [];
@@ -38,7 +38,19 @@
             @else
                 <div class="d-flex flex-column align-items-center my-3">
                     <div class="col-md-10 col-11 p-2 bg-light mb-1">
-                        <h5 class="text-center">Let's follow</h5>
+                        <div class="my-5 mx-auto text-center">
+                            <a href="{{route('post.create')}}" class="nav-link">
+                                <h5 class="bg-success text-light p-3">Let's do your first post here!!</h5>
+                                <i class="fa-solid fa-circle-plus icon-sm text-success"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{-- //following suggestion --}}
+                <div class="col-3 fixedCon p-2">
+                    @include('users.post.components.following.reccomedation')
+                    <div class="text-muted">
+                        <a href="{{route('follower.show', Auth::id())}}" class="muted_text text-decoration-none">View All suggestion</a>
                     </div>
                 </div>
             @endif

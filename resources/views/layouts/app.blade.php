@@ -71,8 +71,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{-- {{ Auth::user()->name }} --}}
+                                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if (Auth::user()->avatar)
                                         <img src="{{asset('/storage/images/'.Auth::user()->avatar)}}" alt="#" class="rounded-circle avatar_icon_sm">
                                     @else
@@ -81,6 +80,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    {{-- adminpage --}}
+                                    @if (Auth::user()->role_id == 1)
+                                        <a href="{{route('users.show', Auth::id())}}" class="dropdown-item">
+                                            Admin page
+                                        </a>
+                                    @endif
+
+                                    {{-- profile --}}
                                     <a href="{{route('profile')}}" class="dropdown-item">
                                         {{Auth::user()->username}}'s Profile
                                     </a>

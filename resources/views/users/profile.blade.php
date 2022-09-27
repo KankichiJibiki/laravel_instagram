@@ -69,7 +69,7 @@
                 <div class="col-10 p-2 d-flex flex-wrap">
                     @foreach ($posts as $post)
                         <a href="{{route('post.show', $post)}}" class="col-4 post_image">
-                            <img src="{{asset('storage/images/' . $post->image)}}" alt="" class="w-100 img-responsive border border-secondary">
+                            <img src="{{asset('storage/images/' . $post->image)}}" alt="" class="w-100 img-responsive border border-secondary h-100" >
                         </a>
                     @endforeach
                 </div>

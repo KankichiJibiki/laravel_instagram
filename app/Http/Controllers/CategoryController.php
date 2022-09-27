@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private $category;
+
+    public function __construct(Category $category)
+    {
+        $this->category = $category;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +31,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = $this->category->withTrashed()->latest()->get();
+        return view('users.admin.category')->with('categories', $categories);
     }
 
     /**
@@ -36,7 +43,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->category->create($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -81,6 +89,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back();
+    }
+
+    public function unhide_category($id){
+        $category = $this->category->withTrashed()->findOrFail($id);
+        $category->restore();
+        return redirect()->back();
     }
 }

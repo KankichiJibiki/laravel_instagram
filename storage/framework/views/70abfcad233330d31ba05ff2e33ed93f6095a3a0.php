@@ -71,8 +71,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    
+                                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <?php if(Auth::user()->avatar): ?>
                                         <img src="<?php echo e(asset('/storage/images/'.Auth::user()->avatar)); ?>" alt="#" class="rounded-circle avatar_icon_sm">
                                     <?php else: ?>
@@ -81,6 +80,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    
+                                    <?php if(Auth::user()->role_id == 1): ?>
+                                        <a href="<?php echo e(route('users.show', Auth::id())); ?>" class="dropdown-item">
+                                            Admin page
+                                        </a>
+                                    <?php endif; ?>
+
+                                    
                                     <a href="<?php echo e(route('profile')); ?>" class="dropdown-item">
                                         <?php echo e(Auth::user()->username); ?>'s Profile
                                     </a>

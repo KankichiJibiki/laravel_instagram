@@ -138,4 +138,20 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('index');
     }
+
+    public function hideBlock($id){
+        $post = $this->post->findOrFail($id);
+        $post->delete();
+        return redirect()->back();
+    }
+
+    public function unhide($id){
+        $post = $this->post->withTrashed()->findOrFail($id);
+        $post->restore();
+        return redirect()->back();
+    }
+
+    public function showPostAdmin(){
+        return view('users.admin.post')->with('posts', $this->post->withTrashed()->get());
+    }
 }
