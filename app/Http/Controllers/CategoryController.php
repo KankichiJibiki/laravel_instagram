@@ -31,7 +31,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->withTrashed()->latest()->get();
+        //
+    }
+
+    public function showCategoryAdmin()
+    {
+        $categories = $this->category->withTrashed()->latest()->paginate(6);
         return view('users.admin.category')->with('categories', $categories);
     }
 
@@ -89,7 +94,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        //
+    }
+    public function hide_category($id)
+    {
+        $this->category->destroy($id);
         return redirect()->back();
     }
 

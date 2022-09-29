@@ -12,7 +12,6 @@ class FollowerController extends Controller
 {
 
     private $follower;
-    private $user_followers;
 
     public function __construct(Follower $follower, User $user)
     {
@@ -101,6 +100,6 @@ class FollowerController extends Controller
     public function destroy($id)
     {
         $this->follower->destroy($id);
-        return redirect()->back();
+        return redirect()->route('index');
     }
 }

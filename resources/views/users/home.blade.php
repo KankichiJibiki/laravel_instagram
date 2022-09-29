@@ -11,7 +11,9 @@
                 <div class="d-flex flex-column align-items-center my-3">
                     @php
                         $followers_arr = [];
+                        $hashMap = [];
                         foreach(Auth::user()->followers as $follower) {
+                            $hashMap[$follower->following_id] = $follower->id;
                             $followers_arr[] = $follower->following_id;
                         }
                     @endphp

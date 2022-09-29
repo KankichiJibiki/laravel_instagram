@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     const LOCAL_STORAGE = 'public/images/';
-    public $post;
-    public $category;
+    private $post;
+    private $category;
 
     public function __construct(Post $post, Category $category)
     {
@@ -23,7 +23,9 @@ class PostController extends Controller
 
     public function rules(){
         return [
-            "user_id" => ['require'],
+            'image'=>['required', 'image', 'size:1024'],
+            'description'=>['required', 'max:500'],
+            'categories'=>['required']
         ];
     }
     /**
@@ -63,6 +65,8 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate($this->rules());
+
         $this->post->user_id = Auth::id();
         $this->post->description = $request->description;
         $this->post->image = $this->saveImage($request->image);
@@ -110,6 +114,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate($this->rules());
+
         if($request->has('image')){
             $post->image = $this->saveImage($request->image);
         }
@@ -152,6 +158,6 @@ class PostController extends Controller
     }
 
     public function showPostAdmin(){
-        return view('users.admin.post')->with('posts', $this->post->withTrashed()->get());
+        return view('users.admin.post')->with('posts', $this->post->withTrashed()->paginate(5));
     }
 }

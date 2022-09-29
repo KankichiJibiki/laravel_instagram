@@ -81,10 +81,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     
-                                    <?php if(Auth::user()->role_id == 1): ?>
-                                        <a href="<?php echo e(route('users.show', Auth::id())); ?>" class="dropdown-item">
-                                            Admin page
-                                        </a>
+                                    <?php if(Auth::check()): ?>
+                                        <?php if(Auth::user()->role_id == 1): ?>
+                                            <a href="<?php echo e(route('admin.adminPage', Auth::id())); ?>" class="dropdown-item">
+                                                Admin page
+                                            </a>
+                                        <?php endif; ?>
                                     <?php endif; ?>
 
                                     
@@ -113,6 +115,8 @@
         <main class="bg-dark">
             <div class="container-fluid">
                 <div class="row justify-content-center align-items-center">
+                    
+
                     
                     <div class="col-9">
                         <?php echo $__env->yieldContent('content'); ?>

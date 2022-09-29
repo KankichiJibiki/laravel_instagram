@@ -30,14 +30,14 @@
                                 </td>
                                 <td>
                                     <?php if($category->deleted_at == null): ?>
-                                        <form action="<?php echo e(route('categories.destroy', $category->id)); ?>" method="post">
+                                        <form action="<?php echo e(route('admin.hide_category', $category->id)); ?>" method="post">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('DELETE'); ?>
 
                                             <button type="submit" class="btn btn-danger">Hide</button>
                                         </form>
                                     <?php else: ?>
-                                        <form action="<?php echo e(route('unhide_category', $category->id)); ?>" method="post">
+                                        <form action="<?php echo e(route('admin.unhide_category', $category->id)); ?>" method="post">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('PATCH'); ?>
 
@@ -49,6 +49,8 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
+                <?php echo e($categories->links()); ?>
+
             </div>
 
         </div>

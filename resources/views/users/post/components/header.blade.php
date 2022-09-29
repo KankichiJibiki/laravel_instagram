@@ -35,7 +35,7 @@
                         </div>
                     @else
                         <div class="dropdown-item">
-                            <form action="" method="post">
+                            <form action="{{ route('follower.destroy', $hashMap[$post->user->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
 

@@ -29,14 +29,14 @@
                                 <td class="col-5"><?php echo e($post->created_at); ?></td>
                                 <td>
                                     <?php if($post->deleted_at == null): ?>
-                                        <form action="<?php echo e(route('hideBlock', $post->id)); ?>" method="post">
+                                        <form action="<?php echo e(route('admin.hideBlock', $post->id)); ?>" method="post">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('DELETE'); ?>
 
                                             <button type="submit" class="btn btn-danger">Hide</button>
                                         </form>
                                     <?php else: ?>
-                                        <form action="<?php echo e(route('unhide', $post->id)); ?>" method="post">
+                                        <form action="<?php echo e(route('admin.unhide', $post->id)); ?>" method="post">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('PATCH'); ?>
 
@@ -48,6 +48,8 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
+                <?php echo e($posts->links()); ?>
+
             </div>
 
         </div>

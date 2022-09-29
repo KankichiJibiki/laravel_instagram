@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public $comments;
+    private $comments;
 
     public function __construct(Comment $comment)
     {
@@ -20,6 +20,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function rules(){
+        return [
+            'content'=>['required', 'max:200'],
+        ];
+    }
+
     public function index()
     {
         //
@@ -43,6 +49,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->rules());
         $user_id = ['user_id' => Auth::id()];
         $this->comments->create(array_merge($request->all(), $user_id))->save();
         return redirect()->back();

@@ -12,6 +12,19 @@
             <div class="order-2 col-12 col-md-5">
                 
                 <div class="mb-3 text-dark">
+                    <?php $__errorArgs = ['categories'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="text-danger">
+                            <?php echo e($message); ?>
+
+                        </div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     <h5>Category</h5>
                     <div class="form-check-inline d-flex flex-wrap">
                         <?php
@@ -35,6 +48,19 @@
                 </div>
                 
                 <div class="mb-3">
+                    <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="text-danger">
+                            <?php echo e($message); ?>
+
+                        </div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     <h5>Description</h5>
                     <textarea name="description" id="description" cols="30" rows="10" class="form-control"><?php echo e($post->description); ?></textarea>
                 </div>

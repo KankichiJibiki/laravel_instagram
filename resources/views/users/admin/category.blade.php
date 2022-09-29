@@ -30,14 +30,14 @@
                                 </td>
                                 <td>
                                     @if($category->deleted_at == null)
-                                        <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                        <form action="{{ route('admin.hide_category', $category->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
 
                                             <button type="submit" class="btn btn-danger">Hide</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('unhide_category', $category->id) }}" method="post">
+                                        <form action="{{ route('admin.unhide_category', $category->id) }}" method="post">
                                             @csrf
                                             @method('PATCH')
 
@@ -49,6 +49,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $categories->links() }}
             </div>
 
         </div>

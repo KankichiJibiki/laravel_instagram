@@ -24,18 +24,31 @@ use App\Http\Controllers\LikeController;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'] ,function(){
-    Route::patch('/users/{user_id}/activate', [UserController::class, 'activate'])->name('activate');
-    Route::get('/post/adminPost', [PostController::class, 'showPostAdmin'])->name('showPostAdmin');
-    Route::delete('/post/hideBlock/{post_id}', [PostController::class, 'hideBlock'])->name('hideBlock');
-    Route::patch('/post/unhide/{post_id}', [PostController::class, 'unhide'])->name('unhide');
-
     Route::get('/', [HomeController::class, 'index'])->name('index');
+
     Route::resource('/post', PostController::class)->except('index');
+
+        Route::get('/users/profile', [UserController::class, 'profile'])->name('profile');
+        Route::post('/users/{user_id}/result', [UserController::class, 'search_result'])->name('search_result');
+    Route::resource('/users', UserController::class);
+
     Route::resource('/comments', CommentController::class);
-    Route::get('/users/profile', [UserController::class, 'create'])->name('profile');
-    Route::resource('/users', UserController::class)->except('create');
     Route::resource('/follower', FollowerController::class);
     Route::resource('/likes', LikeController::class);
     Route::resource('/categories', CategoryController::class);
-    Route::patch('/categories/unhide_category/{category_id}', [CategoryController::class, 'unhide_category'])->name('unhide_category');
+
+    Route::group(["prefix"=>"admin", "as"=>"admin."], function(){
+        Route::get('/users/adminPage/{user_id}', [UserController::class, 'adminPage'])->name('adminPage');
+        Route::patch('/{user_id}/activate', [UserController::class, 'activate'])->name('activate');
+        Route::delete('/{user_id}/deactivate', [UserController::class, 'deactivate'])->name('deactivate');
+
+        Route::get('/post/adminPost', [PostController::class, 'showPostAdmin'])->name('showPostAdmin');
+        Route::delete('/post/hideBlock/{post_id}', [PostController::class, 'hideBlock'])->name('hideBlock');
+        Route::patch('/post/unhide/{post_id}', [PostController::class, 'unhide'])->name('unhide');
+        
+        
+        Route::get('/post/showCategoryAdmin', [CategoryController::class, 'showCategoryAdmin'])->name('showCategoryAdmin');
+        Route::delete('/categories/unhide_category/{category_id}', [CategoryController::class, 'hide_category'])->name('hide_category');
+        Route::patch('/categories/unhide_category/{category_id}', [CategoryController::class, 'unhide_category'])->name('unhide_category');
+    });
 });

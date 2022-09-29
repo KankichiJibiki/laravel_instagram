@@ -29,14 +29,14 @@
                                 <td class="col-5">{{ $post->created_at }}</td>
                                 <td>
                                     @if ($post->deleted_at == null)
-                                        <form action="{{ route('hideBlock', $post->id) }}" method="post">
+                                        <form action="{{ route('admin.hideBlock', $post->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
 
                                             <button type="submit" class="btn btn-danger">Hide</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('unhide', $post->id) }}" method="post">
+                                        <form action="{{ route('admin.unhide', $post->id) }}" method="post">
                                             @csrf
                                             @method('PATCH')
 
@@ -48,6 +48,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $posts->links() }}
             </div>
 
         </div>

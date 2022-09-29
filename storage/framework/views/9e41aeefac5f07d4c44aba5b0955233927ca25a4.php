@@ -35,7 +35,7 @@
                         </div>
                     <?php else: ?>
                         <div class="dropdown-item">
-                            <form action="" method="post">
+                            <form action="<?php echo e(route('follower.destroy', $hashMap[$post->user->id])); ?>" method="post">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('delete'); ?>
 

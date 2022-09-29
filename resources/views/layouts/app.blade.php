@@ -81,10 +81,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     {{-- adminpage --}}
-                                    @if (Auth::user()->role_id == 1)
-                                        <a href="{{route('users.show', Auth::id())}}" class="dropdown-item">
-                                            Admin page
-                                        </a>
+                                    @if (Auth::check())
+                                        @if (Auth::user()->role_id == 1)
+                                            <a href="{{route('admin.adminPage', Auth::id())}}" class="dropdown-item">
+                                                Admin page
+                                            </a>
+                                        @endif
                                     @endif
 
                                     {{-- profile --}}
@@ -112,6 +114,23 @@
         <main class="bg-dark">
             <div class="container-fluid">
                 <div class="row justify-content-center align-items-center">
+                    {{-- @if (request()->is('admin/*'))
+                        <div class="col-md-3 col-12 mb-3">
+                            <ul class="list-group" id="categoryGroup">
+                                <li class="p-1 list-group-item">
+                                    <a href="{{ route('users.show', Auth::id()) }}" class="text-decoration-none text-dark"><i class="fa-solid fa-users p-1"></i>Users</a>
+                                </li>
+                                <li class="p-1 list-group-item">
+                                    <a href="{{route('showPostAdmin')}}" class="text-decoration-none text-dark"><i class="fa-solid fa-signs-post p-1"></i>Posts</a>
+                                </li>
+                                <li class="p-1 list-group-item">
+                                    <a href="{{ route('categories.create') }}" class="text-decoration-none text-dark"><i class="fa-solid fa-clipboard p-1"></i>Categories</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    @endif --}}
+
                     {{-- admin content --}}
                     <div class="col-9">
                         @yield('content')

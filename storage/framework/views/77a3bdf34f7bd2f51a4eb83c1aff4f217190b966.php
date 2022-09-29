@@ -7,8 +7,23 @@
             
             <?php echo $__env->make('users.admin.components.category', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+        
             
             <div class="col-lg-8 col-12 mb-3">
+                
+                <div class="col-7 float-end mb-3">
+                    <form action="<?php echo e(route('search_result', Auth::id())); ?>" method="post">
+                        <?php echo csrf_field(); ?>
+
+                        <div class="input-group">
+                            <input type="text" name="q" id="q" placeholder="Search..." class="form-control">
+                            
+                            <button type="submit" class="btn btn-dark text-light input-group-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
                 <table class="table table-striped table-hover">
                     <thead class="text-uppercase bg-success text-light">
@@ -28,7 +43,6 @@
                                 <td><?php echo e($user->created_at); ?></td>
                                 <td>
                                     <?php if(is_null($user->deleted_at)): ?>
-                                    
                                         Active
                                     <?php else: ?>
                                         Inactive
@@ -36,14 +50,14 @@
                                 </td>
                                 <td>
                                     <?php if(is_null($user->deleted_at) && $user->id != Auth::id()): ?>
-                                        <form action="<?php echo e(route('users.destroy', $user->id)); ?>" method="post">
+                                        <form action="<?php echo e(route('admin.deactivate', $user->id)); ?>" method="post">
                                         <?php echo csrf_field(); ?>
                                         <?php echo method_field("DELETE"); ?>
                                         
                                             <button type="submit" class="btn btn-danger">Deactivate</button>
                                         </form>
                                     <?php elseif(!is_null($user->deleted_at) && $user->id != Auth::id()): ?>
-                                        <form action="<?php echo e(route('activate', $user->id)); ?>" method="post">
+                                        <form action="<?php echo e(route('admin.activate', $user->id)); ?>" method="post">
                                         <?php echo csrf_field(); ?>
                                         <?php echo method_field("PATCH"); ?>
 
@@ -55,6 +69,8 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
+                <?php echo e($users->links()); ?>
+
             </div>
         </div>
     </div>

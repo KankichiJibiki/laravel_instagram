@@ -3,6 +3,14 @@
 @section('title', 'Post')
 
 @section('content')
+    @php
+        $followers_arr = [];
+        $hashMap = [];
+        foreach(Auth::user()->followers as $follower) {
+            $hashMap[$follower->following_id] = $follower->id;
+            $followers_arr[] = $follower->following_id;
+        }
+    @endphp
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="bg-light p-2 col-md-9 col-11 my-2 shadow-lg">
             <div class="d-flex flex-wrap justify-content-around">

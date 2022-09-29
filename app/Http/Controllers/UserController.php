@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Follower;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
@@ -42,13 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $posts = Post::where('user_id', '=', Auth::id())->latest()->get();
-        $followers = $this->follower->all();
-
-        return view('users.profile')
-        ->with('posts', $posts)
-        ->with('followers', $followers)
-        ->with('users', $this->user->latest()->get());
+        //
     }
 
     /**
@@ -70,7 +66,23 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $userWithTrashed = $this->user->withTrashed()->get();
+        //
+    }
+
+    public function profile()
+    {
+        $posts = Post::where('user_id', '=', Auth::id())->latest()->get();
+        $followers = $this->follower->all();
+
+        return view('users.profile')
+        ->with('posts', $posts)
+        ->with('followers', $followers)
+        ->with('users', $this->user->latest()->get());
+    }
+
+    public function adminPage($id)
+    {
+        $userWithTrashed = $this->user->withTrashed()->paginate(4);
         return view('users.admin.user')
             ->with('users', $userWithTrashed)
             ->with('posts', $this->post->latest()->get())
@@ -123,6 +135,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function deactivate($id)
+    {
         $user = $this->user->findOrFail($id);
         $user->delete();
         return redirect()->back();
@@ -133,5 +148,16 @@ class UserController extends Controller
         $user->restore();
 
         return redirect()->back();
+    }
+
+    public function search_result(Request $request){
+        $q = $request->q;
+        // return $q;
+        $users = $this->user->where('username', 'LIKE', '%'.$q.'%')->orWhere('email', 'LIKE', '%'.$q.'%')->paginate(4);
+
+        return view('users.admin.user')
+            ->with('users', $users)
+            ->with('posts', $this->post->latest()->get())
+            ->with('categories', $this->category->latest()->get());
     }
 }

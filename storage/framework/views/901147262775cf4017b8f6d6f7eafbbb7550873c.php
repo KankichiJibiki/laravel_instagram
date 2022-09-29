@@ -12,6 +12,19 @@
                 
                 <div class="mb-3">
                     <div class="row">
+                        <?php $__errorArgs = ['categories'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="text-danger">
+                                <?php echo e($message); ?>
+
+                            </div>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         <h5 class="col fw-bold">Category</h5>
                         <span class="col text-muted">(Up to 3)</span>
                     </div>
@@ -26,6 +39,19 @@
                 </div>
                 
                 <div class="mb-3">
+                    <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="text-danger">
+                            <?php echo e($message); ?>
+
+                        </div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     <label for="description" class="form-label fw-bold fs-5">Description</label>
                     <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
                 </div>
@@ -35,6 +61,19 @@
             <div class="col-md-5 col-12">
                 
                 <div class="mb-4">
+                    <?php $__errorArgs = ['image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="text-danger">
+                            <?php echo e($message); ?>
+
+                        </div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     <label for="image" class="form-label fw-bold fs-5">Post Image</label>
                     <input type="file" name="image" id="image" class="form-control">
                 </div>

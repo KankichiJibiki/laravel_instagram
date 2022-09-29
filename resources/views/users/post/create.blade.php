@@ -12,6 +12,11 @@
                 {{-- checkbox --}}
                 <div class="mb-3">
                     <div class="row">
+                        @error('categories')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         <h5 class="col fw-bold">Category</h5>
                         <span class="col text-muted">(Up to 3)</span>
                     </div>
@@ -26,6 +31,11 @@
                 </div>
                 {{-- description --}}
                 <div class="mb-3">
+                    @error('description')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
                     <label for="description" class="form-label fw-bold fs-5">Description</label>
                     <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
                 </div>
@@ -35,6 +45,11 @@
             <div class="col-md-5 col-12">
                 {{-- post image --}}
                 <div class="mb-4">
+                    @error('image')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
                     <label for="image" class="form-label fw-bold fs-5">Post Image</label>
                     <input type="file" name="image" id="image" class="form-control">
                 </div>

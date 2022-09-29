@@ -12,6 +12,11 @@
             <div class="order-2 col-12 col-md-5">
                 {{-- checkBox --}}
                 <div class="mb-3 text-dark">
+                    @error('categories')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
                     <h5>Category</h5>
                     <div class="form-check-inline d-flex flex-wrap">
                         @php
@@ -35,6 +40,11 @@
                 </div>
                 {{-- description --}}
                 <div class="mb-3">
+                    @error('description')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
                     <h5>Description</h5>
                     <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$post->description}}</textarea>
                 </div>

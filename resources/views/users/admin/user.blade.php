@@ -7,8 +7,23 @@
             {{-- category --}}
             @include('users.admin.components.category')
 
+        
             {{-- table --}}
             <div class="col-lg-8 col-12 mb-3">
+                {{-- search bar --}}
+                <div class="col-7 float-end mb-3">
+                    <form action="{{ route('search_result', Auth::id()) }}" method="post">
+                        @csrf
+
+                        <div class="input-group">
+                            <input type="text" name="q" id="q" placeholder="Search..." class="form-control">
+                            
+                            <button type="submit" class="btn btn-dark text-light input-group-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
                 <table class="table table-striped table-hover">
                     <thead class="text-uppercase bg-success text-light">
@@ -28,7 +43,6 @@
                                 <td>{{ $user->created_at }}</td>
                                 <td>
                                     @if (is_null($user->deleted_at))
-                                    
                                         Active
                                     @else
                                         Inactive
@@ -36,14 +50,14 @@
                                 </td>
                                 <td>
                                     @if (is_null($user->deleted_at) && $user->id != Auth::id())
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                        <form action="{{ route('admin.deactivate', $user->id) }}" method="post">
                                         @csrf
                                         @method("DELETE")
                                         
                                             <button type="submit" class="btn btn-danger">Deactivate</button>
                                         </form>
                                     @elseif(!is_null($user->deleted_at) && $user->id != Auth::id())
-                                        <form action="{{ route('activate', $user->id) }}" method="post">
+                                        <form action="{{ route('admin.activate', $user->id) }}" method="post">
                                         @csrf
                                         @method("PATCH")
 
@@ -55,6 +69,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $users->links() }}
             </div>
         </div>
     </div>
