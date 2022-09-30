@@ -9,6 +9,7 @@
                 $hashMap[$like->post_id] = $like->id;
             endforeach;
         @endphp
+
         {{-- {{Auth::user()->likes}} --}}
         @if (in_array($post->id, $likes_arr))
             {{-- unlike --}}
@@ -33,6 +34,15 @@
                 </button>
             </form>
         @endif
+
+        {{-- Like ajax version --}}
+        {{-- @if ()
+            <i class="fa-solid fa-heart btn-opt"></i>
+        @else --}}
+            
+        {{-- @endif --}}
+
+
         
         <!-- Modal trigger button -->
         <button type="button" class="action_icon p-0 bg-light border-0" data-bs-toggle="modal" data-bs-target="#view_comment_{{$post->id}}">

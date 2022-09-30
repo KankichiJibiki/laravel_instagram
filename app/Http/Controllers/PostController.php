@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function rules(){
         return [
-            'image'=>['required', 'image', 'size:1024'],
+            'image'=>['required', 'image', 'max:2084'],
             'description'=>['required', 'max:500'],
             'categories'=>['required']
         ];

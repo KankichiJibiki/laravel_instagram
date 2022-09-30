@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'] ,function(){
     Route::resource('/likes', LikeController::class);
     Route::resource('/categories', CategoryController::class);
 
-    Route::group(["prefix"=>"admin", "as"=>"admin."], function(){
+    Route::group(["prefix"=>"admin", "as"=>"admin.", "middleware"=>"can:admin"], function(){
         Route::get('/users/adminPage/{user_id}', [UserController::class, 'adminPage'])->name('adminPage');
         Route::patch('/{user_id}/activate', [UserController::class, 'activate'])->name('activate');
         Route::delete('/{user_id}/deactivate', [UserController::class, 'deactivate'])->name('deactivate');
@@ -52,3 +52,7 @@ Route::group(['middleware' => 'auth'] ,function(){
         Route::patch('/categories/unhide_category/{category_id}', [CategoryController::class, 'unhide_category'])->name('unhide_category');
     });
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -9,6 +9,7 @@
                 $hashMap[$like->post_id] = $like->id;
             endforeach;
         ?>
+
         
         <?php if(in_array($post->id, $likes_arr)): ?>
             
@@ -33,6 +34,13 @@
                 </button>
             </form>
         <?php endif; ?>
+
+        
+        
+            
+        
+
+
         
         <!-- Modal trigger button -->
         <button type="button" class="action_icon p-0 bg-light border-0" data-bs-toggle="modal" data-bs-target="#view_comment_<?php echo e($post->id); ?>">

@@ -1,10 +1,8 @@
 
 
-<?php $__env->startSection('title', 'Login'); ?>
-
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    <div class="row justify-content-center my-5 vh-100">
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><?php echo e(__('Login')); ?></div>
@@ -69,7 +67,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
-                        <!-- <div class="row mb-3">
+                        <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" <?php echo e(old('remember') ? 'checked' : ''); ?>>
@@ -80,7 +78,7 @@ unset($__errorArgs, $__bag); ?>
                                     </label>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
